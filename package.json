@@ -1,0 +1,25 @@
+{
+  "name": "istac-gds-indicadores",
+  "version": "1.0.0",
+  "description": "Google Data Studio Connector",
+  "devDependencies": {},
+  "scripts": {
+    "test": "jest",
+    "coverage": "jest --coverage"
+  },
+  "jest": {
+    "collectCoverageFrom": [
+      "src/*.js"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@gitlab.com:edosoft/antoniofumero/dat-istac-gds/istac-gds-indicadores.git"
+  },
+  "author": "Carlos Espino Timón",
+  "license": "ISC",
+  "dependencies": {
+    "@google/clasp": "2.2.1",
+    "jest": "24.9.0"
+  }
+}

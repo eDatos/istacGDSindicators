@@ -64,8 +64,6 @@ function Utils() {
        .setText(message)
        .throwException();
   }
-  
-  
 
 }
 

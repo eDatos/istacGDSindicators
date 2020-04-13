@@ -1,5 +1,12 @@
 /* istanbul ignore file */
 
+const strPad = function(input, padLength, padString = ' ') {
+  while (input.length < padLength) {
+    input = padString + input;
+  }
+  return input;
+};
+
 function RecodeDatesHelper() {
   const START = "^";
   const END = "$";
@@ -197,7 +204,7 @@ function RecodeDatesHelper() {
         if (date.match(new RegExp(START + GPE_BIYEARLY_PATTERN + END))) {
           const year = date.match(new RegExp(START + GPE_BIYEARLY_PATTERN + END))[1];
           const month = (date.match(new RegExp(START + GPE_BIYEARLY_PATTERN + END))[2] - 1) * 6;
-          return year + (month + 1) + "01";
+          return year + strPad("" + (month + 1), 2, "0") + "01";
         }
         break;
       }
@@ -205,7 +212,7 @@ function RecodeDatesHelper() {
         if (date.match(new RegExp(START + GPE_QUARTERLY_PATTERN + END))) {
           const year = date.match(new RegExp(START + GPE_QUARTERLY_PATTERN + END))[1];
           const month =(date.match(new RegExp(START + GPE_QUARTERLY_PATTERN + END))[2] - 1) * 3;
-          return year + (month + 1) + "01";
+          return year + strPad("" + (month + 1), 2, "0") + "01";
         }
         break;
       }
@@ -213,7 +220,7 @@ function RecodeDatesHelper() {
         if (date.match(new RegExp(START + GPE_MONTHLY_PATTERN + END))) {
           const year = date.match(new RegExp(START + GPE_MONTHLY_PATTERN + END))[1];
           const month = date.match(new RegExp(START + GPE_MONTHLY_PATTERN + END))[2];
-          return year + month + "01";
+          return year + strPad("" + (month), 2, "0") + "01";
         }
         break;
       }
@@ -223,7 +230,7 @@ function RecodeDatesHelper() {
           const day =
             (date.match(new RegExp(START + GPE_WEEKLY_PATTERN + END))[2] - 1) * 7;
           date = new Date(year, "", day + 1);
-          return year + date.getMonth() + date.getDate();
+          return year + strPad("" + (date.getMonth()), 2, "0") + date.getDate();
         }
         break;
       }
@@ -232,7 +239,7 @@ function RecodeDatesHelper() {
           const year = date.match(new RegExp(START + GPE_DAILY_PATTERN + END))[1];
           const month = date.match(new RegExp(START + GPE_DAILY_PATTERN + END))[2];
           const day = date.match(new RegExp(START + GPE_DAILY_PATTERN + END))[3];
-          return year + month + day;
+          return year + strPad("" + (month), 2, "0") + day;
         }
         break;
       }

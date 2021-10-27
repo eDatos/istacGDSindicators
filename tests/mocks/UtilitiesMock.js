@@ -10,11 +10,12 @@ function UtilitiesMock() {
 }
 
 UtilitiesMock.prototype.base64EncodeWebSafe = function (valueToEncode) {
+    console.log()
     return valueToEncode;
 };
 
 UtilitiesMock.prototype.computeDigest = function(algoritm, stringToGetHash, encoding) {
-    return btoa(stringToGetHash)
+    return Buffer.from(stringToGetHash,'utf-8').toString('base64')
 }
 
 /* global exports */

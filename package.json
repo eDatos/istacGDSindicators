@@ -2,7 +2,6 @@
   "name": "istac-gds-indicadores",
   "version": "1.0.0",
   "description": "Google Data Studio Connector",
-  "devDependencies": {},
   "scripts": {
     "test": "jest",
     "coverage": "jest --coverage"
@@ -19,7 +18,11 @@
   "author": "Carlos Espino Timón",
   "license": "ISC",
   "dependencies": {
-    "@google/clasp": "2.2.1",
-    "jest": "24.9.0"
+    "@google/clasp": "^2.4.1"
+  },
+  "devDependencies": {
+    "@types/google-apps-script": "^1.0.38",
+    "jest": "^27.3.1",
+    "btoa": "^1.2.1"
   }
 }

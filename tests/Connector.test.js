@@ -32,7 +32,7 @@ test("isAdminUser", () => {
 
 test("checkIfEndConfiguration : with indicatorSelector and indicator selected", () => {
   var configParams = {
-   indicator: "https://www3.gobiernodecanarias.org/istac/api/indicators/v1.0/indicators/SUPERFICIE", 
+   indicator: "https://datos.canarias.es/api/estadisticas/indicators/v1.0/indicators/SUPERFICIE", 
    indicatorType: "indicatorSelector", 
    subject: "011"
   };

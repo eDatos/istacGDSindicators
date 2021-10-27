@@ -160,15 +160,15 @@ function SchemaHelper(services) {
     if(!configParams.inputUrl) {
       error = "URL field must not be empty";
     } else if (
-      (configParams.inputUrl.indexOf("https://www3.gobiernodecanarias.org/istac/api/indicators/v1.0/indicatorsSystems/") !== 0) &&
-      (configParams.inputUrl.indexOf("https://www3.gobiernodecanarias.org/istac/api/indicators/v1.0/indicators/")!== 0)
+      (configParams.inputUrl.indexOf("https://datos.canarias.es/api/estadisticas/indicators/v1.0/indicatorsSystems/") !== 0) &&
+      (configParams.inputUrl.indexOf("https://datos.canarias.es/api/estadisticas/indicators/v1.0/indicators/")!== 0)
     ) {
       error = "URL field entered is not correct for this connector";
     }
     if(error) {
       const message =
         "Por favor, asegúrese de que el campo URL no está vacío y que la URL tiene el siguiente formato: " +
-        "https://www3.gobiernodecanarias.org/istac/api/indicators/v1.0/indicators/SUPERFICIE o https://www3.gobiernodecanarias.org/istac/api/indicators/v1.0/indicatorsSystems/C00075A/indicatorsInstances/4257778c-a75a-4d04-a9df-b2f0c1263bde";
+        "https://datos.canarias.es/api/estadisticas/indicators/v1.0/indicators/SUPERFICIE o https://datos.canarias.es/api/estadisticas/indicators/v1.0/indicatorsSystems/C00075A/indicatorsInstances/4257778c-a75a-4d04-a9df-b2f0c1263bde";
       utils.throwConectorError(error, message);
     }
   }

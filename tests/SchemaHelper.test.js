@@ -23,7 +23,7 @@ beforeEach(() => {
 
 test("getColumns: without extra configuration, just indicator", () => {
   var configParams = {
-    indicator:"https://www3.gobiernodecanarias.org/istac/api/indicators/v1.0/indicators/POBLACION", 
+    indicator:"https://datos.canarias.es/api/estadisticas/indicators/v1.0/indicators/POBLACION", 
     indicatorType: "indicatorSelector", 
     subject:"021"
   };
@@ -36,7 +36,7 @@ test("getColumns: without extra configuration, just indicator", () => {
 
 test("getColumns: without showGranularity, recodeDates, showLables and all languages", () => {
   var configParams = {
-    indicator:"https://www3.gobiernodecanarias.org/istac/api/indicators/v1.0/indicators/POBLACION", 
+    indicator:"https://datos.canarias.es/api/estadisticas/indicators/v1.0/indicators/POBLACION", 
     measureColumns:true,
     indicatorType: "indicatorSelector", 
     subject:"021"
@@ -50,7 +50,7 @@ test("getColumns: without showGranularity, recodeDates, showLables and all langu
 
 test("getColumns: without measureColumns, recodeDates, showLables and all languages", () => {
   var configParams = {
-    indicator:"https://www3.gobiernodecanarias.org/istac/api/indicators/v1.0/indicators/POBLACION", 
+    indicator:"https://datos.canarias.es/api/estadisticas/indicators/v1.0/indicators/POBLACION", 
     showGranularity:true, 
     indicatorType: "indicatorSelector", 
     subject:"021"
@@ -64,7 +64,7 @@ test("getColumns: without measureColumns, recodeDates, showLables and all langua
 
 test("getColumns: without recodeDates, showLables and all languages", () => {
   var configParams = {
-    indicator:"https://www3.gobiernodecanarias.org/istac/api/indicators/v1.0/indicators/POBLACION", 
+    indicator:"https://datos.canarias.es/api/estadisticas/indicators/v1.0/indicators/POBLACION", 
     showGranularity:true, 
     indicatorType: "indicatorSelector", 
     subject:"021", 
@@ -78,7 +78,7 @@ test("getColumns: without recodeDates, showLables and all languages", () => {
 
 test("getColumns: without showLables and all languages", () => {
   var configParams = {
-    indicator:"https://www3.gobiernodecanarias.org/istac/api/indicators/v1.0/indicators/POBLACION", 
+    indicator:"https://datos.canarias.es/api/estadisticas/indicators/v1.0/indicators/POBLACION", 
     showGranularity:true, 
     indicatorType: "indicatorSelector", 
     subject:"021", 
@@ -95,7 +95,7 @@ test("getColumns: without showLables and all languages", () => {
 
 test("getColumns: without all languages", () => {
   var configParams = {
-    indicator:"https://www3.gobiernodecanarias.org/istac/api/indicators/v1.0/indicators/POBLACION", 
+    indicator:"https://datos.canarias.es/api/estadisticas/indicators/v1.0/indicators/POBLACION", 
     showGranularity:true, 
     showLabels:true, 
     indicatorType: "indicatorSelector", 
@@ -111,7 +111,7 @@ test("getColumns: without all languages", () => {
 
 test("getColumns: with everything marked", () => {
   var configParams = {
-    indicator:"https://www3.gobiernodecanarias.org/istac/api/indicators/v1.0/indicators/POBLACION", 
+    indicator:"https://datos.canarias.es/api/estadisticas/indicators/v1.0/indicators/POBLACION", 
     showGranularity:true, 
     allLanguages:true, 
     showLabels:true, 

@@ -3,7 +3,7 @@ function ConfigHelper(services) {
   const cacheHelper = services.CacheHelper;
   const utils = services.Utils;
   
-  const METADATA_ENDPOINT = "https://www3.gobiernodecanarias.org/istac/api/cmetadata/v1.0/properties.json";
+  const METADATA_ENDPOINT = "https://datos.canarias.es/api/estadisticas/cmetadata/v1.0/properties.json";
   const INDICATOR_KEY = "indicators.rest.external";
   const END_OF_SUBJECT_ENDPOINT = "/v1.0/subjects";
   const END_OF_INDICATORS_ENDPOINT = "/v1.0/indicators?limit=1000&orderBy=ID%20ASC&q=subjectCode%20EQ%20";

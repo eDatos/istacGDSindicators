@@ -107,7 +107,7 @@ test("getIndicators", () => {
       id: "IPC",
       kind: "indicators#indicator",
       selfLink:
-        "https://www3.gobiernodecanarias.org/istac/api/indicators/v1.0/indicators/IPC",
+        "https://datos.canarias.es/api/estadisticas/indicators/v1.0/indicators/IPC",
       subjectCode: "042",
       subjectTitle: {
         __default__: "042 Precios, consumo e inversión",
@@ -116,7 +116,7 @@ test("getIndicators", () => {
       systemSurveyLinks: [
         {
           href:
-            "https://www3.gobiernodecanarias.org/istac/api/indicators/v1.0/indicatorsSystems/C00075A",
+            "https://datos.canarias.es/api/estadisticas/indicators/v1.0/indicatorsSystems/C00075A",
           kind: "indicators#indicatorsSystem"
         }
       ],
@@ -148,7 +148,7 @@ test("getIndicators", () => {
           "El campo de consumo del IPC no incluye los bienes recibidos en especie en concepto de autoconsumo, autosuministro, salario en especie, comidas gratuitas o bonificadas ni los alquileres imputados de las viviendas en las que residen los hogares, cuando son propietarios."
       },
       selfLink:
-        "https://www3.gobiernodecanarias.org/istac/api/indicators/v1.0/indicators/IPC_SUBYACENTE",
+        "https://datos.canarias.es/api/estadisticas/indicators/v1.0/indicators/IPC_SUBYACENTE",
       subjectCode: "042",
       subjectTitle: {
         __default__: "042 Precios, consumo e inversión",
@@ -157,7 +157,7 @@ test("getIndicators", () => {
       systemSurveyLinks: [
         {
           href:
-            "https://www3.gobiernodecanarias.org/istac/api/indicators/v1.0/indicatorsSystems/C00075A",
+            "https://datos.canarias.es/api/estadisticas/indicators/v1.0/indicatorsSystems/C00075A",
           kind: "indicators#indicatorsSystem"
         }
       ],
@@ -194,10 +194,10 @@ test("getIndicatorsSystems", () => {
       },
       publicationDate: "2018-05-15T15:05:07.587+01:00",
       selfLink:
-        "https://www3.gobiernodecanarias.org/istac/api/indicators/v1.0/indicatorsSystems/C00075H",
+        "https://datos.canarias.es/api/estadisticas/indicators/v1.0/indicatorsSystems/C00075H",
       statisticalOperationLink: {
         href:
-          "https://www3.gobiernodecanarias.org/istac/api/operations/v1.0/operations/C00075H",
+          "https://datos.canarias.es/api/estadisticas/operations/v1.0/operations/C00075H",
         kind: "statisticalOperations#operation"
       },
       title: {
@@ -222,10 +222,10 @@ test("getIndicatorsSystems", () => {
       },
       publicationDate: "2019-05-14T09:23:50.025+01:00",
       selfLink:
-        "https://www3.gobiernodecanarias.org/istac/api/indicators/v1.0/indicatorsSystems/C00062A",
+        "https://datos.canarias.es/api/estadisticas/indicators/v1.0/indicatorsSystems/C00062A",
       statisticalOperationLink: {
         href:
-          "https://www3.gobiernodecanarias.org/istac/api/operations/v1.0/operations/C00062A",
+          "https://datos.canarias.es/api/estadisticas/operations/v1.0/operations/C00062A",
         kind: "statisticalOperations#operation"
       },
       title: {
@@ -257,11 +257,11 @@ test("getIndicatorsInstances", () => {
       kind: "indicators#indicatorInstance",
       parentLink: {
         href:
-          "https://www3.gobiernodecanarias.org/istac/api/indicators/v1.0/indicatorsSystems/C00075H/indicatorsInstances",
+          "https://datos.canarias.es/api/estadisticas/indicators/v1.0/indicatorsSystems/C00075H/indicatorsInstances",
         kind: "indicators#indicatorInstances"
       },
       selfLink:
-        "https://www3.gobiernodecanarias.org/istac/api/indicators/v1.0/indicatorsSystems/C00075H/indicatorsInstances/96fe5971-25a3-4a4f-a3b5-a8f3d029c171",
+        "https://datos.canarias.es/api/estadisticas/indicators/v1.0/indicatorsSystems/C00075H/indicatorsInstances/96fe5971-25a3-4a4f-a3b5-a8f3d029c171",
       systemCode: "C00075H",
       title: {
         __default__: "Empleo registrado. Autónomos",
@@ -282,11 +282,11 @@ test("getIndicatorsInstances", () => {
       kind: "indicators#indicatorInstance",
       parentLink: {
         href:
-          "https://www3.gobiernodecanarias.org/istac/api/indicators/v1.0/indicatorsSystems/C00075H/indicatorsInstances",
+          "https://datos.canarias.es/api/estadisticas/indicators/v1.0/indicatorsSystems/C00075H/indicatorsInstances",
         kind: "indicators#indicatorInstances"
       },
       selfLink:
-        "https://www3.gobiernodecanarias.org/istac/api/indicators/v1.0/indicatorsSystems/C00075H/indicatorsInstances/21af0477-d63b-493b-ad02-4ab181547223",
+        "https://datos.canarias.es/api/estadisticas/indicators/v1.0/indicatorsSystems/C00075H/indicatorsInstances/21af0477-d63b-493b-ad02-4ab181547223",
       systemCode: "C00075H",
       title: {
         __default__: "Población inactiva. Hombres",

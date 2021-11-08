@@ -203,7 +203,7 @@ function Connector(services) {
         .newTextInput()
         .setId("inputUrl")
         .setName("URL")
-        .setHelpText("Esta URL debe ser una petición de la API. Como por ejemplo: https://www3.gobiernodecanarias.org/istac/api/indicators/v1.0/indicators/SUPERFICIE o https://www3.gobiernodecanarias.org/istac/api/indicators/v1.0/indicatorsSystems/C00075A/indicatorsInstances/4257778c-a75a-4d04-a9df-b2f0c1263bde")
+        .setHelpText("Esta URL debe ser una petición de la API. Como por ejemplo: https://datos.canarias.es/api/estadisticas/indicators/v1.0/indicators/SUPERFICIE o https://datos.canarias.es/api/estadisticas/indicators/v1.0/indicatorsSystems/C00075A/indicatorsInstances/4257778c-a75a-4d04-a9df-b2f0c1263bde")
         .setPlaceholder("Escribe aquí la url");
   
       config = this.obtainFormatResponse(config);

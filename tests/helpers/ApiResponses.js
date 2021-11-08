@@ -2,7 +2,7 @@ const metadataResponse = {
   property: [
     {
       key: "indicators.rest.external",
-      value: "https://www3.gobiernodecanarias.org/istac/api/indicators",
+      value: "https://datos.canarias.es/api/estadisticas/indicators",
       kind: "commonMetadata#property"
     }
   ]
@@ -12,7 +12,7 @@ const subjects = {
   kind: "indicators#subjects",
   total: 20,
   selfLink:
-    "https://www3.gobiernodecanarias.org/istac/api/indicators/v1.0/subjects",
+    "https://datos.canarias.es/api/estadisticas/indicators/v1.0/subjects",
   items: [
     {
       id: "042",
@@ -85,13 +85,13 @@ const indicators = {
   limit: 1000,
   total: 2,
   selfLink:
-    "https://www3.gobiernodecanarias.org/istac/api/indicators/v1.0/indicators?q=subjectCode EQ 042&limit=1000&offset=0",
+    "https://datos.canarias.es/api/estadisticas/indicators/v1.0/indicators?q=subjectCode EQ 042&limit=1000&offset=0",
   items: [
     {
       id: "IPC",
       kind: "indicators#indicator",
       selfLink:
-        "https://www3.gobiernodecanarias.org/istac/api/indicators/v1.0/indicators/IPC",
+        "https://datos.canarias.es/api/estadisticas/indicators/v1.0/indicators/IPC",
       code: "IPC",
       version: "1.35",
       title: {
@@ -113,7 +113,7 @@ const indicators = {
         {
           kind: "indicators#indicatorsSystem",
           href:
-            "https://www3.gobiernodecanarias.org/istac/api/indicators/v1.0/indicatorsSystems/C00075A"
+            "https://datos.canarias.es/api/estadisticas/indicators/v1.0/indicatorsSystems/C00075A"
         }
       ],
       conceptDescription: {
@@ -129,7 +129,7 @@ const indicators = {
       id: "IPC_SUBYACENTE",
       kind: "indicators#indicator",
       selfLink:
-        "https://www3.gobiernodecanarias.org/istac/api/indicators/v1.0/indicators/IPC_SUBYACENTE",
+        "https://datos.canarias.es/api/estadisticas/indicators/v1.0/indicators/IPC_SUBYACENTE",
       code: "IPC_SUBYACENTE",
       version: "1.33",
       title: {
@@ -146,7 +146,7 @@ const indicators = {
         {
           kind: "indicators#indicatorsSystem",
           href:
-            "https://www3.gobiernodecanarias.org/istac/api/indicators/v1.0/indicatorsSystems/C00075A"
+            "https://datos.canarias.es/api/estadisticas/indicators/v1.0/indicatorsSystems/C00075A"
         }
       ],
       conceptDescription: {
@@ -173,13 +173,13 @@ const indicatorsSystems = {
   kind: "indicators#indicatorsSystems",
   total: 4,
   selfLink:
-    "https://www3.gobiernodecanarias.org/istac/api/indicators/v1.0/indicatorsSystems?limit=25&offset=0",
+    "https://datos.canarias.es/api/estadisticas/indicators/v1.0/indicatorsSystems?limit=25&offset=0",
   items: [
     {
       id: "C00075H",
       kind: "indicators#indicatorsSystem",
       selfLink:
-        "https://www3.gobiernodecanarias.org/istac/api/indicators/v1.0/indicatorsSystems/C00075H",
+        "https://datos.canarias.es/api/estadisticas/indicators/v1.0/indicatorsSystems/C00075H",
       code: "C00075H",
       version: "1.284",
       publicationDate: "2018-05-15T15:05:07.587+01:00",
@@ -191,7 +191,7 @@ const indicatorsSystems = {
       statisticalOperationLink: {
         kind: "statisticalOperations#operation",
         href:
-          "https://www3.gobiernodecanarias.org/istac/api/operations/v1.0/operations/C00075H"
+          "https://datos.canarias.es/api/estadisticas/operations/v1.0/operations/C00075H"
       },
       description: {
         en:
@@ -214,7 +214,7 @@ const indicatorsSystems = {
       id: "C00062A",
       kind: "indicators#indicatorsSystem",
       selfLink:
-        "https://www3.gobiernodecanarias.org/istac/api/indicators/v1.0/indicatorsSystems/C00062A",
+        "https://datos.canarias.es/api/estadisticas/indicators/v1.0/indicatorsSystems/C00062A",
       code: "C00062A",
       version: "1.548",
       publicationDate: "2019-05-14T09:23:50.025+01:00",
@@ -230,7 +230,7 @@ const indicatorsSystems = {
       statisticalOperationLink: {
         kind: "statisticalOperations#operation",
         href:
-          "https://www3.gobiernodecanarias.org/istac/api/operations/v1.0/operations/C00062A"
+          "https://datos.canarias.es/api/estadisticas/operations/v1.0/operations/C00062A"
       },
       description: {
         es:
@@ -254,22 +254,22 @@ const indicatorsInstances = {
   offset: 0,
   total: 50,
   selfLink:
-    "https://www3.gobiernodecanarias.org/istac/api/indicators/v1.0/indicatorsSystems/C00075H/indicatorsInstances?limit=1000&offset=0",
+    "https://datos.canarias.es/api/estadisticas/indicators/v1.0/indicatorsSystems/C00075H/indicatorsInstances?limit=1000&offset=0",
   parentLink: {
     kind: "indicators#indicatorsSystem",
     href:
-      "https://www3.gobiernodecanarias.org/istac/api/indicators/v1.0/indicatorsSystems/C00075H"
+      "https://datos.canarias.es/api/estadisticas/indicators/v1.0/indicatorsSystems/C00075H"
   },
   items: [
     {
       id: "21af0477-d63b-493b-ad02-4ab181547223",
       kind: "indicators#indicatorInstance",
       selfLink:
-        "https://www3.gobiernodecanarias.org/istac/api/indicators/v1.0/indicatorsSystems/C00075H/indicatorsInstances/21af0477-d63b-493b-ad02-4ab181547223",
+        "https://datos.canarias.es/api/estadisticas/indicators/v1.0/indicatorsSystems/C00075H/indicatorsInstances/21af0477-d63b-493b-ad02-4ab181547223",
       parentLink: {
         kind: "indicators#indicatorInstances",
         href:
-          "https://www3.gobiernodecanarias.org/istac/api/indicators/v1.0/indicatorsSystems/C00075H/indicatorsInstances"
+          "https://datos.canarias.es/api/estadisticas/indicators/v1.0/indicatorsSystems/C00075H/indicatorsInstances"
       },
       title: {
         en: "Inactive population. Men",
@@ -290,11 +290,11 @@ const indicatorsInstances = {
       id: "96fe5971-25a3-4a4f-a3b5-a8f3d029c171",
       kind: "indicators#indicatorInstance",
       selfLink:
-        "https://www3.gobiernodecanarias.org/istac/api/indicators/v1.0/indicatorsSystems/C00075H/indicatorsInstances/96fe5971-25a3-4a4f-a3b5-a8f3d029c171",
+        "https://datos.canarias.es/api/estadisticas/indicators/v1.0/indicatorsSystems/C00075H/indicatorsInstances/96fe5971-25a3-4a4f-a3b5-a8f3d029c171",
       parentLink: {
         kind: "indicators#indicatorInstances",
         href:
-          "https://www3.gobiernodecanarias.org/istac/api/indicators/v1.0/indicatorsSystems/C00075H/indicatorsInstances"
+          "https://datos.canarias.es/api/estadisticas/indicators/v1.0/indicatorsSystems/C00075H/indicatorsInstances"
       },
       title: {
         es: "Empleo registrado. Autónomos",
@@ -317,10 +317,10 @@ const indicatorsInstances = {
 const response = {
     "id": "POBLACION",
     "kind": "indicators#indicator",
-    "selfLink": "https://www3.gobiernodecanarias.org/istac/api/indicators/v1.0/indicators/POBLACION",
+    "selfLink": "https://datos.canarias.es/api/estadisticas/indicators/v1.0/indicators/POBLACION",
     "parentLink": {
         "kind": "indicators#indicators",
-        "href": "https://www3.gobiernodecanarias.org/istac/api/indicators/v1.0/indicators"
+        "href": "https://datos.canarias.es/api/estadisticas/indicators/v1.0/indicators"
     },
     "code": "POBLACION",
     "version": "1.010",
@@ -340,11 +340,11 @@ const response = {
     "systemSurveyLinks": [
         {
             "kind": "indicators#indicatorsSystem",
-            "href": "https://www3.gobiernodecanarias.org/istac/api/indicators/v1.0/indicatorsSystems/C00067A"
+            "href": "https://datos.canarias.es/api/estadisticas/indicators/v1.0/indicatorsSystems/C00067A"
         },
         {
             "kind": "indicators#indicatorsSystem",
-            "href": "https://www3.gobiernodecanarias.org/istac/api/indicators/v1.0/indicatorsSystems/C00062A"
+            "href": "https://datos.canarias.es/api/estadisticas/indicators/v1.0/indicatorsSystems/C00062A"
         }
     ],
     "conceptDescription": {
@@ -1964,7 +1964,7 @@ const response = {
                                 "__default__": "Población"
                             },
                             "kind": "indicators#indicator",
-                            "href": "https://www3.gobiernodecanarias.org/istac/api/indicators/v1.0/indicators/POBLACION"
+                            "href": "https://datos.canarias.es/api/estadisticas/indicators/v1.0/indicators/POBLACION"
                         }
                     }
                 },
@@ -2000,7 +2000,7 @@ const response = {
                                 "__default__": "Población"
                             },
                             "kind": "indicators#indicator",
-                            "href": "https://www3.gobiernodecanarias.org/istac/api/indicators/v1.0/indicators/POBLACION"
+                            "href": "https://datos.canarias.es/api/estadisticas/indicators/v1.0/indicators/POBLACION"
                         }
                     }
                 },
@@ -2070,7 +2070,7 @@ const response = {
     },
     "childLink": {
         "kind": "indicators#indicatorData",
-        "href": "https://www3.gobiernodecanarias.org/istac/api/indicators/v1.0/indicators/POBLACION/data"
+        "href": "https://datos.canarias.es/api/estadisticas/indicators/v1.0/indicators/POBLACION/data"
     },
     "subjectTitle": {
         "es": "021 Población",
@@ -2081,10 +2081,10 @@ const response = {
 
 const responseData = {
     "kind": "indicators#indicatorData",
-    "selfLink": "https://www3.gobiernodecanarias.org/istac/api/indicators/v1.0/indicators/POBLACION/data",
+    "selfLink": "https://datos.canarias.es/api/estadisticas/indicators/v1.0/indicators/POBLACION/data",
     "parentLink": {
         "kind": "indicators#indicator",
-        "href": "https://www3.gobiernodecanarias.org/istac/api/indicators/v1.0/indicators/POBLACION"
+        "href": "https://datos.canarias.es/api/estadisticas/indicators/v1.0/indicators/POBLACION"
     },
     "format": [
         "GEOGRAPHICAL",
@@ -2203,13 +2203,13 @@ const responseData = {
 }
 
 const responses = {
-  "https://www3.gobiernodecanarias.org/istac/api/cmetadata/v1.0/properties.json": metadataResponse,
-  "https://www3.gobiernodecanarias.org/istac/api/indicators/v1.0/subjects": subjects,
-  "https://www3.gobiernodecanarias.org/istac/api/indicators/v1.0/indicators?limit=1000&orderBy=ID%20ASC&q=subjectCode%20EQ%20042": indicators,
-  "https://www3.gobiernodecanarias.org/istac/api/indicators/v1.0/indicatorsSystems": indicatorsSystems,
-  "https://www3.gobiernodecanarias.org/istac/api/indicators/v1.0/indicatorsSystems/C00075H/indicatorsInstances?limit=1000": indicatorsInstances,
-  "https://www3.gobiernodecanarias.org/istac/api/indicators/v1.0/indicators/POBLACION": response,
-  "https://www3.gobiernodecanarias.org/istac/api/indicators/v1.0/indicators/POBLACION/data": responseData
+  "https://datos.canarias.es/api/estadisticas/cmetadata/v1.0/properties.json": metadataResponse,
+  "https://datos.canarias.es/api/estadisticas/indicators/v1.0/subjects": subjects,
+  "https://datos.canarias.es/api/estadisticas/indicators/v1.0/indicators?limit=1000&orderBy=ID%20ASC&q=subjectCode%20EQ%20042": indicators,
+  "https://datos.canarias.es/api/estadisticas/indicators/v1.0/indicatorsSystems": indicatorsSystems,
+  "https://datos.canarias.es/api/estadisticas/indicators/v1.0/indicatorsSystems/C00075H/indicatorsInstances?limit=1000": indicatorsInstances,
+  "https://datos.canarias.es/api/estadisticas/indicators/v1.0/indicators/POBLACION": response,
+  "https://datos.canarias.es/api/estadisticas/indicators/v1.0/indicators/POBLACION/data": responseData
 };
 
 

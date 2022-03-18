@@ -7,7 +7,7 @@ function Utils() {
       case "indicatorInstanceSelector":
         return configParams.indicatorInstance;
       case "inputUrlSelector":
-        return configParams.inputUrl;
+        return encodeURI(configParams.inputUrl);
       default:
         return;
     }
@@ -27,14 +27,16 @@ function Utils() {
         }
         break;
       case "inputUrlSelector":
-        if (configParams.inputUrl.indexOf("/api/indicators/v1.0/indicators/") > -1) {
+        if (configParams.inputUrl.indexOf("/indicators/v1.0/indicators/") > -1) {
           col = { id: response.id, name: response.title.es };
-        } else if (configParams.inputUrl.indexOf("/api/indicators/v1.0/indicatorsSystems/") > -1) {
+        } else if (configParams.inputUrl.indexOf("/indicators/v1.0/indicatorsSystems/") > -1) {
           if (configParams.measureColumns) {
             col = { id: 'indicator_id', name: response.subjectCode };
           } else {
             col = { id: 'indicator_id', name: response.title.es };
           }
+        } else {
+          col = undefined;
         }
         break;
       default:

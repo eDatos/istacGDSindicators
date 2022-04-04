@@ -119,8 +119,44 @@ function SchemaHelper(services) {
     
     let mainCols = _buildCols(configParams, columnsGeographic, geographicalLanguages);
     let timeCols = _buildCols(configParams, columnsTime, timeLanguages);
-  
+
+    let granularity = null;
+
+    if(configParams.recodeDates) {
+      const granularityOrder = {
+        'YEARLY': 1,
+        'BIYEARLY': 2,
+        'QUARTERLY': 3,
+        'MONTHLY': 4,
+        'WEEKLY': 5,
+        'DAILY': 6
+      };
+
+      const granularitySet = new Set();
+
+      if(indicatorsResponse.dimension.TIME && indicatorsResponse.dimension.TIME.representation) {
+        for(let timeRepresentation of indicatorsResponse.dimension.TIME.representation) {
+          if(timeRepresentation.granularityCode) {
+            granularitySet.add(timeRepresentation.granularityCode);
+          }
+        }
+      }
+
+      let minimumGranularityIndex = 0;
+
+      // TODO: comprobar valores posibles
+      for(let temporalGranularity of granularitySet) {
+        if(granularityOrder[temporalGranularity] && granularityOrder[temporalGranularity] > minimumGranularityIndex) {
+          minimumGranularityIndex = granularityOrder[temporalGranularity];
+          granularity = temporalGranularity;
+        }
+      }
+    }
+
     for(let column of timeCols) {
+      if(configParams.recodeDates && column.dataType == 'date' && granularity) {
+        column.dataType += "_" + granularity;
+      }
       mainCols.push(column);
     }
   

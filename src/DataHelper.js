@@ -24,6 +24,21 @@ function DataHelper(services) {
     }
     return newObject;
   }
+
+  this._fixFieldId = function(fieldId) {
+    //return fieldId;
+    const idsTranslator = [
+      "_date_YEAR", "_date_YEAR_MONTH",
+      "_date_YEAR_QUARTER", "_date_YEAR_MONTH_DAY",
+      "_date_YEAR_WEEK"
+    ];
+    for(let idSuffix of idsTranslator) {
+      if(fieldId.endsWith(idSuffix)) {
+        return fieldId.substring(0, fieldId.length - idSuffix.length);
+      }
+    }
+    return fieldId;
+  }
     
   /* istanbul ignore next */
   /**
@@ -50,12 +65,14 @@ function DataHelper(services) {
   }
   
   this._processData = function(configParams, requestedFields) {
-    const requestedFieldsArray = requestedFields.asArray().map(i => i.getId());
+    //const requestedFieldsArray = requestedFields.asArray().map(i => i.getId());
+    const requestedFieldsArray = requestedFields.asArray().map(i => this._fixFieldId(i.getId()));
   
     const url = utils.getUrl(configParams);
     const indicatorsResponse = cacheHelper.fetchJsonUrl(url);
-  
-    const urlData = url + "/data";
+
+    const urlData = indicatorsResponse.childLink.href;
+    //const urlData = url + "/data";
     
     const indicatorsDataResponse = cacheHelper.fetchJsonUrl(urlData);
   
@@ -84,6 +101,39 @@ function DataHelper(services) {
     let tableData = [];
   
     const col = utils.getColNameAndId(indicatorsResponse, configParams);
+
+    const granularityOrder = {
+      'YEARLY': 1,
+      'BIYEARLY': 2,
+      'QUARTERLY': 3,
+      'MONTHLY': 4,
+      'WEEKLY': 5,
+      'DAILY': 6
+    };
+
+    let desiredGranularity = null;
+
+    if(configParams.recodeDates) {
+      const granularitySet = new Set();
+
+      if(indicatorsResponse.dimension.TIME && indicatorsResponse.dimension.TIME.representation) {
+        for(let timeRepresentation of indicatorsResponse.dimension.TIME.representation) {
+          if(timeRepresentation.granularityCode) {
+            granularitySet.add(timeRepresentation.granularityCode);
+          }
+        }
+      }
+
+      let minimumGranularityIndex = 0;
+
+      // TODO: comprobar valores posibles
+      for(let temporalGranularity of granularitySet) {
+        if(granularityOrder[temporalGranularity] && granularityOrder[temporalGranularity] > minimumGranularityIndex) {
+          minimumGranularityIndex = granularityOrder[temporalGranularity];
+          desiredGranularity = temporalGranularity;
+        }
+      }
+    }
   
     const lengthGeographical = indicatorsDataResponse.dimension.GEOGRAPHICAL.representation.size;
     for (var i = 0; i < lengthGeographical; i++) {
@@ -100,6 +150,9 @@ function DataHelper(services) {
   
           if(configParams.recodeDates) {
             const granularity = indexedTimeRepresentations[codigoTemporal].granularityCode;
+            if(desiredGranularity && granularity != desiredGranularity) {
+              continue;
+            }
             const date = codigoTemporal;
             row.Fecha = recodeDatesHelper.converDate(date, granularity);
           }
@@ -134,7 +187,7 @@ function DataHelper(services) {
               }
             }
           }
-          tableData.push({ values: requestedFieldsArray.map(i => (row[i] === null || typeof row[i] !== 'undefined') ? row[i] : '') });
+          tableData.push({ values: requestedFieldsArray.map(dim => (row[dim] === null || typeof row[dim] !== 'undefined') ? row[dim] : '') });
         } else {
           const lengthMeasure = indicatorsDataResponse.dimension.MEASURE.representation.size;
           for (let k = 0; k < lengthMeasure; k++) {
@@ -147,6 +200,9 @@ function DataHelper(services) {
 
             if(configParams.recodeDates) {
               const granularity = indexedTimeRepresentations[codigoTemporal].granularityCode;
+              if(desiredGranularity && granularity != desiredGranularity) {
+                continue;
+              }
               const date = codigoTemporal;
               row.Fecha = recodeDatesHelper.converDate(date, granularity);
             }
@@ -176,7 +232,7 @@ function DataHelper(services) {
                 }
               }
             }
-            tableData.push({ values: requestedFieldsArray.map(i => (row[i] === null || typeof row[i] !== 'undefined') ? row[i] : '') });
+            tableData.push({ values: requestedFieldsArray.map(dim => (row[dim] === null || typeof row[dim] !== 'undefined') ? row[dim] : '') });
           }
         }
       }

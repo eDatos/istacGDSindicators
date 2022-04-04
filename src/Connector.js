@@ -22,25 +22,47 @@ function Connector(services) {
     const types = cc.FieldType;
     const columns = schemaHelper.getColumns(request.configParams);
   
-    typesTranslator = {
+    const typesTranslator = {
       string: types.TEXT,
       float: types.NUMBER,
-      date: types.YEAR_MONTH_DAY
+      date: types.YEAR_MONTH_DAY,
+      date_YEARLY: types.YEAR,
+      date_BIYEARLY: types.YEAR_MONTH,
+      date_FOUR_MONTHLY: types.YEAR_MONTH,
+      date_MONTHLY: types.YEAR_MONTH,
+      date_QUARTERLY: types.YEAR_QUARTER,
+      date_DAILY: types.YEAR_MONTH_DAY,
+      date_WEEKLY: types.YEAR_WEEK
+    };
+
+    // sufijo añadido al id de columna para que al actualizar una URL
+    // editando la conexion se actualice el tipo de fecha (si no, no se actualiza)
+    const idsTranslator = {
+      date: "_date_YEAR_MONTH_DAY",
+      date_YEARLY: "_date_YEAR",
+      date_BIYEARLY: "_date_YEAR_MONTH",
+      date_FOUR_MONTHLY: "_date_YEAR_MONTH",
+      date_MONTHLY: "_date_YEAR_MONTH",
+      date_QUARTERLY: "_date_YEAR_QUARTER",
+      date_DAILY: "_date_YEAR_MONTH_DAY",
+      date_WEEKLY: "_date_YEAR_WEEK"
     };
     
     for(let column of columns) {
+      const dataType = typesTranslator[column.dataType];
+      const idSuffix = idsTranslator[column.dataType];
       if (column.columnRole === "metric") {
         fields
           .newMetric()
-          .setId(column.id)
+          .setId(idSuffix ? (column.id + idSuffix) : column.id)
           .setName(column.name)
-          .setType(typesTranslator[column.dataType]);
+          .setType(dataType);
       } else {
         fields
           .newDimension()
-          .setId(column.id)
+          .setId(idSuffix ? (column.id + idSuffix) : column.id)
           .setName(column.name)
-          .setType(typesTranslator[column.dataType]);
+          .setType(dataType);
       }
     }
   

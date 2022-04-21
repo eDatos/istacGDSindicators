@@ -30,6 +30,24 @@ function RecodeDatesHelper() {
   const GPE_DAILY_PATTERN = GROUP_LEFT + GPE_YEAR_PATTERN + GROUP_RIGHT + "\\-?" + GROUP_LEFT + GPE_MONTH_PATTERN + GROUP_RIGHT + GROUP_LEFT
                                               + "0[1-9]|[1-2][0-9]|3[0-1]" + GROUP_RIGHT;
 
+  const GPE_REPORTING_TIME_PERIOD_TYPE =
+    GROUP_LEFT + GPE_YEARLY_PATTERN + GROUP_RIGHT + "|" +
+    GROUP_LEFT + GPE_BIYEARLY_PATTERN + GROUP_RIGHT + "|" +
+    GROUP_LEFT + GPE_QUARTERLY_PATTERN + GROUP_RIGHT + "|" +
+    GROUP_LEFT + GPE_MONTH_PATTERN + GROUP_RIGHT + "|" +
+    GROUP_LEFT + GPE_MONTHLY_PATTERN + GROUP_RIGHT + "|" +
+    GROUP_LEFT + GPE_WEEKLY_PATTERN + GROUP_RIGHT + "|" +
+    GROUP_LEFT + GPE_DAILY_PATTERN + GROUP_RIGHT;
+
+  const GPE_REPORTING_TIME_PERIOD = START + GPE_REPORTING_TIME_PERIOD_TYPE + END;
+  const GPE_REPORTING_YEARLY_TYPE = START + GPE_YEARLY_PATTERN + END;
+  const GPE_REPORTING_BIYEARLY_TYPE = START + GPE_BIYEARLY_PATTERN + END;
+  const GPE_REPORTING_QUARTERLY_TYPE = START + GPE_QUARTERLY_PATTERN + END;
+  const GPE_REPORTING_MONTH_TYPE = START + GPE_MONTH_PATTERN + END;
+  const GPE_REPORTING_MONTHLY_TYPE = START + GPE_MONTHLY_PATTERN + END;
+  const GPE_REPORTING_WEEKLY_TYPE = START + GPE_WEEKLY_PATTERN + END;
+  const GPE_REPORTING_DAILY_TYPE = START + GPE_DAILY_PATTERN + END;
+
   // SDMX
   const REPORTING_YEAR_PERIOD_INDICATOR = "A";
   const REPORTING_SEMESTER_PERIOD_INDICATOR = "S";
@@ -83,6 +101,10 @@ function RecodeDatesHelper() {
 
   const _isReportingTimePeriod = function (time) {
     return time.match(new RegExp(PATTERN_REPORTING_TIME_PERIOD));
+  }
+
+  const _isGpeReportingTimePeriod = function (time) {
+    return time.match(new RegExp(GPE_REPORTING_TIME_PERIOD_TYPE));
   }
 
   const _isDateTime = function (time) {
@@ -184,6 +206,80 @@ function RecodeDatesHelper() {
     return "";
   }
 
+  const _calculateGpeReportingPeriod = function (time) {
+    if (time.match(new RegExp(START + GPE_YEARLY_PATTERN + END))) {
+      //return date + "0101";
+      return time;
+    }
+    if (time.match(new RegExp(START + GPE_BIYEARLY_PATTERN + END))) {
+      const year = time.match(new RegExp(START + GPE_BIYEARLY_PATTERN + END))[1];
+      const month = (time.match(new RegExp(START + GPE_BIYEARLY_PATTERN + END))[2] - 1) * 6;
+      //return year + strPad("" + (month + 1), 2, "0") + "01";
+      return year + strPad("" + (month + 1), 2, "0");
+    }
+    if (time.match(new RegExp(START + GPE_QUARTERLY_PATTERN + END))) {
+      const year = time.match(new RegExp(START + GPE_QUARTERLY_PATTERN + END))[1];
+      // const month = (date.match(new RegExp(START + GPE_QUARTERLY_PATTERN + END))[2] - 1) * 3;
+      // return year + strPad("" + (month + 1), 2, "0") + "01";
+      const quarter = time.match(new RegExp(START + GPE_QUARTERLY_PATTERN + END))[2];
+      return year + quarter;
+    }
+    if (time.match(new RegExp(START + GPE_MONTHLY_PATTERN + END))) {
+      const year = time.match(new RegExp(START + GPE_MONTHLY_PATTERN + END))[1];
+      const month = parseInt(time.match(new RegExp(START + GPE_MONTHLY_PATTERN + END))[2]);
+      //return year + strPad("" + (month), 2, "0") + "01";
+      return year + strPad("" + month, 2, "0");
+    }
+    if (time.match(new RegExp(START + GPE_MONTHLY_PATTERN_WITHOUT_CHARACTER + END))) {
+      const year = time.match(new RegExp(START + GPE_MONTHLY_PATTERN_WITHOUT_CHARACTER + END))[1];
+      const month = parseInt(time.match(new RegExp(START + GPE_MONTHLY_PATTERN_WITHOUT_CHARACTER + END))[2]);
+      //return year + strPad("" + (month), 2, "0") + "01";
+      return year + strPad("" + month, 2, "0");
+    }
+    if (time.match(new RegExp(START + GPE_WEEKLY_PATTERN + END))) {
+      // const year = date.match(new RegExp(START + GPE_WEEKLY_PATTERN + END))[1];
+      // const day =
+      //   (date.match(new RegExp(START + GPE_WEEKLY_PATTERN + END))[2] - 1) * 7;
+      // date = new Date(year, "", day + 1);
+      // return year + strPad("" + (date.getMonth()), 2, "0") + date.getDate();
+      const year = time.match(new RegExp(START + GPE_WEEKLY_PATTERN + END))[1];
+      const week = parseInt(time.match(new RegExp(START + GPE_WEEKLY_PATTERN + END))[2]);
+      return year + strPad("" + week, 2, "0");
+    }
+    if (time.match(new RegExp(START + GPE_DAILY_PATTERN + END))) {
+      const year = time.match(new RegExp(START + GPE_DAILY_PATTERN + END))[1];
+      const month = time.match(new RegExp(START + GPE_DAILY_PATTERN + END))[2];
+      const day = time.match(new RegExp(START + GPE_DAILY_PATTERN + END))[3];
+      return year + strPad("" + (month), 2, "0") + strPad("" + (day), 2, "0");
+    }
+    return time;
+  }
+
+  const _calculateGpeReportingPeriodGranularity = function (time) {
+    if (time.match(new RegExp(GPE_REPORTING_YEARLY_TYPE))) {
+      return "YEARLY";
+    }
+    if (time.match(new RegExp(GPE_REPORTING_BIYEARLY_TYPE))) {
+      return "BIYEARLY";
+    }
+    if (time.match(new RegExp(GPE_REPORTING_QUARTERLY_TYPE))) {
+      return "QUARTERLY";
+    }
+    if (time.match(new RegExp(GPE_REPORTING_MONTH_TYPE))) {
+      return "MONTHLY";
+    }
+    if (time.match(new RegExp(GPE_REPORTING_MONTHLY_TYPE))) {
+      return "MONTHLY";
+    }
+    if (time.match(new RegExp(GPE_REPORTING_WEEKLY_TYPE))) {
+      return "WEEKLY";
+    }
+    if (time.match(new RegExp(GPE_REPORTING_DAILY_TYPE))) {
+      return "DAILY";
+    }
+    return "";
+  }
+
   // DATETIME
   // 2013-07-24T13:21:52.519+01:00
   // 2013-07-24
@@ -219,9 +315,12 @@ function RecodeDatesHelper() {
       date = _calculateReportingPeriod(time);
     } else if (_isDateTime(time)) {
       date = _calculateDateTime(time);
+    } else if (_isGpeReportingTimePeriod(time)) {
+      date = _calculateGpeReportingPeriod(time);
     } else if (_isGregorianTimePeriod(time)) {
       date = _calculateGregorianTimePeriod(time);
     }
+
     return date === null ? time : date;
   }
 
@@ -232,6 +331,8 @@ function RecodeDatesHelper() {
       return _calculateReportingPeriodGranularity(time);
     } else if (_isDateTime(time)) {
       return "";
+    } else if (_isGpeReportingTimePeriod(time)) {
+      return _calculateGpeReportingPeriodGranularity(time);
     } else if (_isGregorianTimePeriod(time)) {
       return "";
     }
@@ -294,6 +395,7 @@ function RecodeDatesHelper() {
           //return year + strPad("" + (month), 2, "0") + "01";
           return year + strPad("" + month, 2, "0");
         }
+
         break;
       }
       // semanal

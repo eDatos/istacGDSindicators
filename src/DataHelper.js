@@ -63,6 +63,85 @@ function DataHelper(services) {
     
     return processedRows;
   }
+
+  const _processQuerystring = function(url) {
+    const urlQuerystring = url.indexOf('?') > 0 ? url.substring(url.indexOf('?')) : '';
+    let urlQuerystringVarMap = new Map();
+
+    if(urlQuerystring && urlQuerystring.length > 1) {
+      const urlQuerystringVars = urlQuerystring.substring(1).split("&");
+      for(let urlQuerystringVar of urlQuerystringVars) {
+        const urlQuerystringVarValueIndex = urlQuerystringVar.indexOf("=");
+        const urlQuerystringVarKeyRaw = urlQuerystringVar.substring(0, urlQuerystringVarValueIndex >= 0 ? urlQuerystringVarValueIndex : urlQuerystringVar.length);
+        const urlQuerystringVarValueRaw = urlQuerystringVarValueIndex >= 0 ? urlQuerystringVar.substring(urlQuerystringVarValueIndex+1) : '';
+        let urlQuerystringVarKey = "";
+        let urlQuerystringVarValue = "";
+        try {
+          urlQuerystringVarKey = decodeURIComponent(urlQuerystringVarKeyRaw);
+        } catch(e) {
+          urlQuerystringVarKey = urlQuerystringVarKeyRaw;
+        }
+        try {
+          urlQuerystringVarValue = decodeURIComponent(urlQuerystringVarValueRaw);
+        } catch(e) {
+          urlQuerystringVarValue = urlQuerystringVarValueRaw;
+        }
+        urlQuerystringVarMap.set(urlQuerystringVarKey, urlQuerystringVarValue);
+      }
+    }
+
+    let dimFiltersRaw = [];
+    let dimFiltersFixed = [];
+
+    if(urlQuerystringVarMap.has("dim")) {
+      const dim = urlQuerystringVarMap.get("dim");
+      const dimFilters = dim.split(",");
+      dimFiltersRaw.push.apply(dimFiltersRaw, dimFilters);
+      urlQuerystringVarMap.delete("dim");
+    }
+
+    if(urlQuerystringVarMap.has("representation")) {
+      const dim = urlQuerystringVarMap.get("representation");
+      const dimFilters = dim.split(",");
+      dimFiltersRaw.push.apply(dimFiltersRaw, dimFilters);
+      urlQuerystringVarMap.delete("representation");
+    }
+
+    if(dimFiltersRaw.length > 0) {
+      for(let dimFilter of dimFiltersRaw) {
+        if(dimFilter.indexOf(":") >= 0) {
+          const dimName = dimFilter.substring(0, dimFilter.indexOf(":"));
+          const dimValue = dimFilter.substring(dimFilter.indexOf(":")+1);
+          dimFiltersFixed.push(dimName + "[" + dimValue + "]");
+        } else {
+          dimFiltersFixed.push(dimFilter);
+        }
+      }
+    }
+
+    const dimFiltersString = dimFiltersFixed.map(i => encodeURIComponent(i)).join(",");
+
+    let querystringFixed = [];
+
+    if(dimFiltersString) {
+      urlQuerystringVarMap.forEach((value, key) => querystringFixed.push(encodeURIComponent(key) + "=" + encodeURIComponent(value)));
+      querystringFixed.push("representation=" + dimFiltersString);
+      querystringFixed = "?" + querystringFixed.join("&");
+    } else {
+      querystringFixed = urlQuerystring;
+    }
+
+    return querystringFixed;
+  }
+
+  const _getUrlData = function(childLinkHref, querystringFixed) {
+    return (querystringFixed && querystringFixed.length > 1) ?
+      (childLinkHref.indexOf('?') > 0 ?
+        (childLinkHref + '&' + querystringFixed.substring(1)) :
+        (childLinkHref + querystringFixed)
+      ) :
+      childLinkHref;
+  }
   
   this._processData = function(configParams, requestedFields) {
     //const requestedFieldsArray = requestedFields.asArray().map(i => i.getId());
@@ -71,7 +150,9 @@ function DataHelper(services) {
     const url = utils.getUrl(configParams);
     const indicatorsResponse = cacheHelper.fetchJsonUrl(url);
 
-    const urlData = indicatorsResponse.childLink.href;
+    const querystringFixed = _processQuerystring(url);
+
+    const urlData = _getUrlData(indicatorsResponse.childLink.href, querystringFixed);
     //const urlData = url + "/data";
     
     const indicatorsDataResponse = cacheHelper.fetchJsonUrl(urlData);

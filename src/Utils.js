@@ -1,16 +1,30 @@
 function Utils() {
 
   this.getUrl = function(configParams) {
+    let url;
     switch(configParams.indicatorType){
       case "indicatorSelector":
-        return configParams.indicator;
+        url = configParams.indicator;
+        break;
       case "indicatorInstanceSelector":
-        return configParams.indicatorInstance;
+        url = configParams.indicatorInstance;
+        break;
       case "inputUrlSelector":
-        return encodeURI(configParams.inputUrl);
-      default:
-        return;
+        url = configParams.inputUrl;
+        let urlPath = url.indexOf('?') > 0 ? url.substring(0, url.indexOf('?')) : url;
+        let urlQuerystring = url.indexOf('?') > 0 ? url.substring(url.indexOf('?')) : '';
+        if(urlPath.match(/\/data\/*$/)) {
+          urlPath = urlPath.replace(/\/data\/*$/, "");
+        }
+        decodedUrl = urlPath + urlQuerystring;
+        do {
+          url = decodedUrl;
+          decodedUrl = decodeURI(url);
+        } while(url != decodedUrl);
+        url = encodeURI(decodedUrl);
+        break;
     }
+    return url;
   }
   
   this.getColNameAndId = function(response, configParams) {

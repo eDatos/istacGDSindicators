@@ -183,38 +183,38 @@ function DataHelper(services) {
   
     const col = utils.getColNameAndId(indicatorsResponse, configParams);
 
-    const granularityOrder = {
-      'YEARLY': 1,
-      'BIYEARLY': 2,
-      'QUARTERLY': 3,
-      'MONTHLY': 4,
-      'WEEKLY': 5,
-      'DAILY': 6
-    };
+    // const granularityOrder = {
+    //   'YEARLY': 1,
+    //   'BIYEARLY': 2,
+    //   'QUARTERLY': 3,
+    //   'MONTHLY': 4,
+    //   'WEEKLY': 5,
+    //   'DAILY': 6
+    // };
 
-    let desiredGranularity = null;
+    // let desiredGranularity = null;
 
-    if(configParams.recodeDates) {
-      const granularitySet = new Set();
+    // if(configParams.recodeDates) {
+    //   const granularitySet = new Set();
 
-      if(indicatorsResponse.dimension.TIME && indicatorsResponse.dimension.TIME.representation) {
-        for(let timeRepresentation of indicatorsResponse.dimension.TIME.representation) {
-          if(timeRepresentation.granularityCode) {
-            granularitySet.add(timeRepresentation.granularityCode);
-          }
-        }
-      }
+    //   if(indicatorsResponse.dimension.TIME && indicatorsResponse.dimension.TIME.representation) {
+    //     for(let timeRepresentation of indicatorsResponse.dimension.TIME.representation) {
+    //       if(timeRepresentation.granularityCode) {
+    //         granularitySet.add(timeRepresentation.granularityCode);
+    //       }
+    //     }
+    //   }
 
-      let minimumGranularityIndex = 0;
+    //   let minimumGranularityIndex = 0;
 
-      // TODO: comprobar valores posibles
-      for(let temporalGranularity of granularitySet) {
-        if(granularityOrder[temporalGranularity] && granularityOrder[temporalGranularity] > minimumGranularityIndex) {
-          minimumGranularityIndex = granularityOrder[temporalGranularity];
-          desiredGranularity = temporalGranularity;
-        }
-      }
-    }
+    //   // TODO: comprobar valores posibles
+    //   for(let temporalGranularity of granularitySet) {
+    //     if(granularityOrder[temporalGranularity] && granularityOrder[temporalGranularity] > minimumGranularityIndex) {
+    //       minimumGranularityIndex = granularityOrder[temporalGranularity];
+    //       desiredGranularity = temporalGranularity;
+    //     }
+    //   }
+    // }
   
     const lengthGeographical = indicatorsDataResponse.dimension.GEOGRAPHICAL.representation.size;
     for (var i = 0; i < lengthGeographical; i++) {
@@ -231,9 +231,9 @@ function DataHelper(services) {
   
           if(configParams.recodeDates) {
             const granularity = indexedTimeRepresentations[codigoTemporal].granularityCode;
-            if(desiredGranularity && granularity != desiredGranularity) {
-              continue;
-            }
+            // if(desiredGranularity && granularity != desiredGranularity) {
+            //   continue;
+            // }
             const date = codigoTemporal;
             row.Fecha = recodeDatesHelper.converDate(date, granularity);
           }
@@ -281,9 +281,9 @@ function DataHelper(services) {
 
             if(configParams.recodeDates) {
               const granularity = indexedTimeRepresentations[codigoTemporal].granularityCode;
-              if(desiredGranularity && granularity != desiredGranularity) {
-                continue;
-              }
+              // if(desiredGranularity && granularity != desiredGranularity) {
+              //   continue;
+              // }
               const date = codigoTemporal;
               row.Fecha = recodeDatesHelper.converDate(date, granularity);
             }

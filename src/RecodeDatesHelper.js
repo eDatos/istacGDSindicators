@@ -125,7 +125,7 @@ function RecodeDatesHelper() {
       date = date.split("T")[0];
     }
     date = date.split("-");
-    return date[0] + "-" + date[1] + "-" + date[2];
+    return strPad(date[0], 4, "0") + strPad(date[1], 2, "0") + strPad(date[2], 2, "0");
   }
 
   // REPORTING TIME PERIOD
@@ -138,39 +138,39 @@ function RecodeDatesHelper() {
   // 2000-D353
   const _calculateReportingPeriod = function (time) {
     if (time.match(new RegExp(PATTERN_REPORTING_YEAR_TYPE))) {
-      //return time.match(new RegExp(PATTERN_REPORTING_YEAR_TYPE))[1] + "0101";
-      return time.match(new RegExp(PATTERN_REPORTING_YEAR_TYPE))[1];
+      return time.match(new RegExp(PATTERN_REPORTING_YEAR_TYPE))[1] + "0101";
+      //return time.match(new RegExp(PATTERN_REPORTING_YEAR_TYPE))[1];
     }
     if (time.match(new RegExp(PATTERN_REPORTING_SEMESTER_TYPE))) {
       const year = time.match(new RegExp(PATTERN_REPORTING_SEMESTER_TYPE))[1];
       const month = (time.match(new RegExp(PATTERN_REPORTING_SEMESTER_TYPE))[3] - 1) * 6;
-      return year + (month + 1);
+      return year + strPad("" + (month + 1), 2, "0") + "01";
     }
     if (time.match(new RegExp(PATTERN_REPORTING_TRIMESTER_TYPE))) {
       const year = time.match(new RegExp(PATTERN_REPORTING_TRIMESTER_TYPE))[1];
       const month = (time.match(new RegExp(PATTERN_REPORTING_TRIMESTER_TYPE))[3] - 1) * 4;
-      return year + (month + 1);
+      return year + strPad("" + (month + 1), 2, "0") + "01";
     }
     if (time.match(new RegExp(PATTERN_REPORTING_QUARTER_TYPE))) {
       const year = time.match(new RegExp(PATTERN_REPORTING_QUARTER_TYPE))[1];
-      //const month = (time.match(new RegExp(PATTERN_REPORTING_QUARTER_TYPE))[3] - 1) * 3;
-      //return year + (month + 1) + "01";
-      const quarter = time.match(new RegExp(PATTERN_REPORTING_QUARTER_TYPE))[3];
-      return year + quarter;
+      const month = (time.match(new RegExp(PATTERN_REPORTING_QUARTER_TYPE))[3] - 1) * 3;
+      return year + strPad("" + (month + 1), 2, "0") + "01";
+      // const quarter = time.match(new RegExp(PATTERN_REPORTING_QUARTER_TYPE))[3];
+      // return year + quarter;
     }
     if (time.match(new RegExp(PATTERN_REPORTING_MONTH_TYPE))) {
       const year = time.match(new RegExp(PATTERN_REPORTING_MONTH_TYPE))[1];
       const month = parseInt(time.match(new RegExp(PATTERN_REPORTING_MONTH_TYPE))[3]);
-      return year + strPad("" + month, 2, "0");
+      return year + strPad("" + month, 2, "0") + "01";
       //return year + month + "01";
     }
     if (time.match(new RegExp(PATTERN_REPORTING_WEEK_TYPE))) {
       const year = time.match(new RegExp(PATTERN_REPORTING_WEEK_TYPE))[1];
-      //const day = (time.match(new RegExp(PATTERN_REPORTING_WEEK_TYPE))[3] - 1) * 7;
-      //const date = new Date(year, "", day + 1);
-      //return year + (date.getMonth() + 1) + date.getDate();
-      const week = parseInt(time.match(new RegExp(PATTERN_REPORTING_WEEK_TYPE))[3]);
-      return year + strPad("" + week, 2, "0");
+      const day = (time.match(new RegExp(PATTERN_REPORTING_WEEK_TYPE))[3] - 1) * 7;
+      const date = new Date(year, "", day + 1);
+      return year + strPad("" + (date.getMonth() + 1), 2, "0") + strPad("" + date.getDate(), 2, "0");
+      // const week = parseInt(time.match(new RegExp(PATTERN_REPORTING_WEEK_TYPE))[3]);
+      // return year + strPad("" + week, 2, "0");
     }
     if (time.match(new RegExp(PATTERN_REPORTING_DAY_TYPE))) {
       const year = time.match(new RegExp(PATTERN_REPORTING_DAY_TYPE))[1];
@@ -209,42 +209,42 @@ function RecodeDatesHelper() {
   const _calculateGpeReportingPeriod = function (time) {
     if (time.match(new RegExp(START + GPE_YEARLY_PATTERN + END))) {
       //return date + "0101";
-      return time;
+      return time + "0101";
     }
     if (time.match(new RegExp(START + GPE_BIYEARLY_PATTERN + END))) {
       const year = time.match(new RegExp(START + GPE_BIYEARLY_PATTERN + END))[1];
       const month = (time.match(new RegExp(START + GPE_BIYEARLY_PATTERN + END))[2] - 1) * 6;
       //return year + strPad("" + (month + 1), 2, "0") + "01";
-      return year + strPad("" + (month + 1), 2, "0");
+      return year + strPad("" + (month + 1), 2, "0") + "01";
     }
     if (time.match(new RegExp(START + GPE_QUARTERLY_PATTERN + END))) {
       const year = time.match(new RegExp(START + GPE_QUARTERLY_PATTERN + END))[1];
-      // const month = (date.match(new RegExp(START + GPE_QUARTERLY_PATTERN + END))[2] - 1) * 3;
-      // return year + strPad("" + (month + 1), 2, "0") + "01";
-      const quarter = time.match(new RegExp(START + GPE_QUARTERLY_PATTERN + END))[2];
-      return year + quarter;
+      const month = (time.match(new RegExp(START + GPE_QUARTERLY_PATTERN + END))[2] - 1) * 3;
+      return year + strPad("" + (month + 1), 2, "0") + "01";
+      // const quarter = time.match(new RegExp(START + GPE_QUARTERLY_PATTERN + END))[2];
+      // return year + quarter;
     }
     if (time.match(new RegExp(START + GPE_MONTHLY_PATTERN + END))) {
       const year = time.match(new RegExp(START + GPE_MONTHLY_PATTERN + END))[1];
       const month = parseInt(time.match(new RegExp(START + GPE_MONTHLY_PATTERN + END))[2]);
-      //return year + strPad("" + (month), 2, "0") + "01";
-      return year + strPad("" + month, 2, "0");
+      return year + strPad("" + (month), 2, "0") + "01";
+      //return year + strPad("" + month, 2, "0");
     }
     if (time.match(new RegExp(START + GPE_MONTHLY_PATTERN_WITHOUT_CHARACTER + END))) {
       const year = time.match(new RegExp(START + GPE_MONTHLY_PATTERN_WITHOUT_CHARACTER + END))[1];
       const month = parseInt(time.match(new RegExp(START + GPE_MONTHLY_PATTERN_WITHOUT_CHARACTER + END))[2]);
-      //return year + strPad("" + (month), 2, "0") + "01";
-      return year + strPad("" + month, 2, "0");
+      return year + strPad("" + (month), 2, "0") + "01";
+      //return year + strPad("" + month, 2, "0");
     }
     if (time.match(new RegExp(START + GPE_WEEKLY_PATTERN + END))) {
-      // const year = date.match(new RegExp(START + GPE_WEEKLY_PATTERN + END))[1];
-      // const day =
-      //   (date.match(new RegExp(START + GPE_WEEKLY_PATTERN + END))[2] - 1) * 7;
-      // date = new Date(year, "", day + 1);
-      // return year + strPad("" + (date.getMonth()), 2, "0") + date.getDate();
       const year = time.match(new RegExp(START + GPE_WEEKLY_PATTERN + END))[1];
-      const week = parseInt(time.match(new RegExp(START + GPE_WEEKLY_PATTERN + END))[2]);
-      return year + strPad("" + week, 2, "0");
+      const day =
+        (time.match(new RegExp(START + GPE_WEEKLY_PATTERN + END))[2] - 1) * 7;
+      const date = new Date(year, "", day + 1);
+      return year + strPad("" + (date.getMonth()), 2, "0") + strPad("" + date.getDate(), 2, "0");
+      // const year = time.match(new RegExp(START + GPE_WEEKLY_PATTERN + END))[1];
+      // const week = parseInt(time.match(new RegExp(START + GPE_WEEKLY_PATTERN + END))[2]);
+      // return year + strPad("" + week, 2, "0");
     }
     if (time.match(new RegExp(START + GPE_DAILY_PATTERN + END))) {
       const year = time.match(new RegExp(START + GPE_DAILY_PATTERN + END))[1];
@@ -288,22 +288,22 @@ function RecodeDatesHelper() {
       time = time.split("T")[0];
     }
     const date = time.split("-");
-    return date[0] + date[1] + date[2];
+    return strPad(date[0], 4, "0") + strPad(date[1], 2, "0") + strPad(date[2], 2, "0");
   }
 
   // GREGORIAN TIME
   // 2000
-  // 2000-01
-  // 2000-01-31
+  // 200001
+  // 200001-31
   const _calculateGregorianTimePeriod = function (time) {
     time = time.split("-");
     switch (time.length) {
       case 1:
-        return time[0] + "0101";
+        return strPad(time[0], 4, "0") + "0101";
       case 2:
-        return time[0] + time[1] + "01";
+        return strPad(time[0], 4, "0") + strPad(time[1], 2, "0") + "01";
       case 3:
-        return time[0] + time[1] + time[2];
+        return strPad(time[0], 4, "0") + strPad(time[1], 2, "0") + strPad(time[2], 2, "0");
     }
   }
 
@@ -345,7 +345,7 @@ function RecodeDatesHelper() {
       case "YEARLY": {
         if (date.match(new RegExp(START + GPE_YEARLY_PATTERN + END))) {
           //return date + "0101";
-          return date;
+          return date + "0101";
         }
         break;
       }
@@ -355,8 +355,8 @@ function RecodeDatesHelper() {
         if (date.match(new RegExp(START + GPE_BIYEARLY_PATTERN + END))) {
           const year = date.match(new RegExp(START + GPE_BIYEARLY_PATTERN + END))[1];
           const month = (date.match(new RegExp(START + GPE_BIYEARLY_PATTERN + END))[2] - 1) * 6;
-          //return year + strPad("" + (month + 1), 2, "0") + "01";
-          return year + strPad("" + (month + 1), 2, "0");
+          return year + strPad("" + (month + 1), 2, "0") + "01";
+          //return year + strPad("" + (month + 1), 2, "0");
         }
         break;
       }
@@ -364,10 +364,10 @@ function RecodeDatesHelper() {
       case "QUARTERLY": {
         if (date.match(new RegExp(START + GPE_QUARTERLY_PATTERN + END))) {
           const year = date.match(new RegExp(START + GPE_QUARTERLY_PATTERN + END))[1];
-          // const month = (date.match(new RegExp(START + GPE_QUARTERLY_PATTERN + END))[2] - 1) * 3;
-          // return year + strPad("" + (month + 1), 2, "0") + "01";
-          const quarter = date.match(new RegExp(START + GPE_QUARTERLY_PATTERN + END))[2];
-          return year + quarter;
+          const month = (date.match(new RegExp(START + GPE_QUARTERLY_PATTERN + END))[2] - 1) * 3;
+          return year + strPad("" + (month + 1), 2, "0") + "01";
+          // const quarter = date.match(new RegExp(START + GPE_QUARTERLY_PATTERN + END))[2];
+          // return year + quarter;
         }
         break;
       }
@@ -377,8 +377,8 @@ function RecodeDatesHelper() {
         if (date.match(new RegExp(START + GPE_BIYEARLY_PATTERN + END))) {
           const year = date.match(new RegExp(START + GPE_BIYEARLY_PATTERN + END))[1];
           const month = (date.match(new RegExp(START + GPE_BIYEARLY_PATTERN + END))[2] - 1) * 3;
-          //return year + strPad("" + (month + 1), 2, "0") + "01";
-          return year + strPad("" + (month + 1), 2, "0");
+          return year + strPad("" + (month + 1), 2, "0") + "01";
+          //return year + strPad("" + (month + 1), 2, "0");
         }
         break;
       }
@@ -387,13 +387,13 @@ function RecodeDatesHelper() {
         if (date.match(new RegExp(START + GPE_MONTHLY_PATTERN + END))) {
           const year = date.match(new RegExp(START + GPE_MONTHLY_PATTERN + END))[1];
           const month = parseInt(date.match(new RegExp(START + GPE_MONTHLY_PATTERN + END))[2]);
-          //return year + strPad("" + (month), 2, "0") + "01";
-          return year + strPad("" + month, 2, "0");
+          return year + strPad("" + (month), 2, "0") + "01";
+          //return year + strPad("" + month, 2, "0");
         } else if(date.match(new RegExp(START + GPE_MONTHLY_PATTERN_WITHOUT_CHARACTER + END))) {
           const year = date.match(new RegExp(START + GPE_MONTHLY_PATTERN_WITHOUT_CHARACTER + END))[1];
           const month = parseInt(date.match(new RegExp(START + GPE_MONTHLY_PATTERN_WITHOUT_CHARACTER + END))[2]);
-          //return year + strPad("" + (month), 2, "0") + "01";
-          return year + strPad("" + month, 2, "0");
+          return year + strPad("" + (month), 2, "0") + "01";
+          //return year + strPad("" + month, 2, "0");
         }
 
         break;
@@ -401,14 +401,14 @@ function RecodeDatesHelper() {
       // semanal
       case "WEEKLY": {
         if (date.match(new RegExp(START + GPE_WEEKLY_PATTERN + END))) {
-          // const year = date.match(new RegExp(START + GPE_WEEKLY_PATTERN + END))[1];
-          // const day =
-          //   (date.match(new RegExp(START + GPE_WEEKLY_PATTERN + END))[2] - 1) * 7;
-          // date = new Date(year, "", day + 1);
-          // return year + strPad("" + (date.getMonth()), 2, "0") + date.getDate();
           const year = date.match(new RegExp(START + GPE_WEEKLY_PATTERN + END))[1];
-          const week = parseInt(date.match(new RegExp(START + GPE_WEEKLY_PATTERN + END))[2]);
-          return year + strPad("" + week, 2, "0");
+          const day =
+            (date.match(new RegExp(START + GPE_WEEKLY_PATTERN + END))[2] - 1) * 7;
+          date = new Date(year, "", day + 1);
+          return year + strPad("" + (date.getMonth()), 2, "0") + strPad(""+date.getDate(), 2, "0");
+          // const year = date.match(new RegExp(START + GPE_WEEKLY_PATTERN + END))[1];
+          // const week = parseInt(date.match(new RegExp(START + GPE_WEEKLY_PATTERN + END))[2]);
+          // return year + strPad("" + week, 2, "0");
         }
         break;
       }
